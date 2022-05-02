@@ -13,9 +13,9 @@ jobs:
         run: 
           # GITHUB_REF is like refs/tage/v2.3.5, so strop the first 11 chrs
           VERSION=${GITHUB_REF:11}
-          MAJOR='echo "$VERSION" | cut -d . -f 1'
-          MINOR='echo "$VERSION" | cut -d . -f 2'
-          PATCH='echo "$VERSION" | cut -d . -f 3'
+          MAJOR=`echo "$VERSION" | cut -d . -f 1`
+          MINOR=`echo "$VERSION" | cut -d . -f 2`
+          PATCH=`echo "$VERSION" | cut -d . -f 3`
           echo "version=$VERSION" >> $GITHUB_ENV
           echo "version_major=$MAJOR" >> $GITHUB_ENV
           echo "version_minor=$MINOR" >> $GITHUB_ENV
@@ -28,7 +28,7 @@ jobs:
         run: |
           IMG=`echo ghcr.io/${{ github.repository }} | tr '[:upper:]' '[:lower:]'`
           docker build \
-          -t ${IMG}:latest .\
+          -t ${IMG}:latest \
           -t ${IMG}: ${{env.version_major}}-latest \
           -t ${IMG}: ${{env.version_major}}.${{ env.version_minor}}-latest \
           -t ${IMG}: ${{env.version}} \
