@@ -26,7 +26,7 @@ jobs:
         
       - name: Build and push
         run: |
-          $IMG = ghcr.io/${{ github.repository }}
+          IMG = ghcr.io/${{ github.repository }}
           docker build \
           -t ${IMG}:latest \
           -t ${IMG}: ${{env.version_major}}-latest \
