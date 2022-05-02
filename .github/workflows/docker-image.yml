@@ -28,7 +28,7 @@ jobs:
         run: |
           IMG = ghcr.io/${{ github.repository }}
           docker build \
-          -t ${IMG}:latest \
+          -t ${IMG}:latest .\
           -t ${IMG}: ${{env.version_major}}-latest \
           -t ${IMG}: ${{env.version_major}}.${{ env.version_minor}}-latest \
           -t ${IMG}: ${{env.version}} \
