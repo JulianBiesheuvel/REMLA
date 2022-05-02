@@ -26,7 +26,7 @@ jobs:
         
       - name: Build and push
         run: |
-          IMG=ghcr.io/${{ github.com/julianbiesheuvel/remla }}
+          IMG=`echo ghcr.io/${{ github.repository }} | tr '[:upper:]' '[:lower:]'`
           docker build \
           -t ${IMG}:latest .\
           -t ${IMG}: ${{env.version_major}}-latest \
