@@ -1,0 +1,57 @@
+schema: '2.0'
+stages:
+  get_data:
+    cmd: python src/get_data.py
+    deps:
+    - path: src/get_data.py
+      md5: 07d872230e3577fd15f4f253f40fdca1
+      size: 399
+    outs:
+    - path: dataset
+      md5: 69700dc670a2d86190d82ac79154445a.dir
+      size: 433355
+      nfiles: 3
+  preprocess:
+    cmd: python src/text_preprocessing.py
+    deps:
+    - path: dataset
+      md5: 69700dc670a2d86190d82ac79154445a.dir
+      size: 433355
+      nfiles: 3
+    - path: src/text_preprocessing.py
+      md5: ed0b9c3b0ff2d70215f4e58f517a46cf
+      size: 2620
+    outs:
+    - path: output/preprocessed_data.joblib
+      md5: 051d311c1f6b61939b17d3f43fb62cd6
+      size: 691433
+      isexec: true
+    - path: output/preprocessor.joblib
+      md5: a6b0ac60ec6eebc56b1485c13053cbe6
+      size: 288061
+      isexec: true
+  train:
+    cmd: python src/text_classification.py AdaBoost
+    deps:
+    - path: output/preprocessed_data.joblib
+      md5: 051d311c1f6b61939b17d3f43fb62cd6
+      size: 691433
+    - path: output/preprocessor.joblib
+      md5: a6b0ac60ec6eebc56b1485c13053cbe6
+      size: 288061
+    - path: src/text_classification.py
+      md5: ea5cea56efbcfb732c31873c80d5d462
+      size: 3385
+    outs:
+    - path: output/accuracy_scores.png
+      md5: 34d4f378697041eb2208999cf4b719f2
+      size: 24000
+      isexec: true
+    - path: output/misclassified_msgs.txt
+      md5: aaf40c416fa8f64a36133872013e9a67
+      size: 98801
+      isexec: true
+    - path: output/model.joblib
+      md5: d87b696069cf3eba5c2d327460724936
+      size: 18818
+      isexec: true

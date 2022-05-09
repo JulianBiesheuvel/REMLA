@@ -1,23 +1,20 @@
-FROM python:3.7.13-slim
+FROM python:3.7.10-slim
+
+RUN apt-get update \
+&& apt-get install -y --no-install-recommends git \
+&& apt-get purge -y --auto-remove \
+&& rm -rf /var/lib/apt/lists/*
 
 WORKDIR /root/
 
+ENV VIRTUAL_ENV=/root/venv
+RUN python -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
 COPY requirements.txt .
-
-RUN  mkdir output &&\
-    python -m pip install --upgrade pip &&\
+RUN python -m pip install --upgrade pip &&\
     pip install -r requirements.txt
-
-COPY src src
-COPY smsspamcollection smsspamcollection
-
-RUN python src/read_data.py &&\
-    python src/text_preprocessing.py &&\
-    python src/text_classification.py
 
 EXPOSE 8080
 
-ENTRYPOINT [ "python" ]
-CMD [ "src/serve_model.py" ]
-
-# blue print how to build a image
+CMD "bash"
