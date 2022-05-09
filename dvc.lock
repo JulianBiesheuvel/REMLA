@@ -4,19 +4,19 @@ stages:
     cmd: python src/get_data.py
     deps:
     - path: src/get_data.py
-      md5: ff59067736320799f32c3c69317f548a
-      size: 501
+      md5: 536b17f26f401d992154ddd3c7e48de1
+      size: 602
     outs:
     - path: dataset
-      md5: 98c8e6651ea0eec3c8dc40aa13dc0760.dir
-      size: 518973
+      md5: 5a84bb806c75cbc704c9fb17e1ba8e44.dir
+      size: 604940
       nfiles: 3
   preprocess:
     cmd: python src/text_preprocessing.py
     deps:
     - path: dataset
-      md5: 98c8e6651ea0eec3c8dc40aa13dc0760.dir
-      size: 518973
+      md5: 5a84bb806c75cbc704c9fb17e1ba8e44.dir
+      size: 604940
       nfiles: 3
     - path: src/text_preprocessing.py
       md5: ed0b9c3b0ff2d70215f4e58f517a46cf
@@ -40,18 +40,21 @@ stages:
       md5: a6b0ac60ec6eebc56b1485c13053cbe6
       size: 288061
     - path: src/text_classification.py
-      md5: ea5cea56efbcfb732c31873c80d5d462
-      size: 3385
+      md5: 1d942fb9e914d56328f4e64f2e083807
+      size: 3503
     outs:
     - path: output/accuracy_scores.png
-      md5: 34d4f378697041eb2208999cf4b719f2
-      size: 24000
+      md5: 54ba509ab430c7cac7249cf625b4ad4d
+      size: 23945
       isexec: true
     - path: output/misclassified_msgs.txt
-      md5: aaf40c416fa8f64a36133872013e9a67
-      size: 98801
+      md5: 249114c9e6a0ec0c8355f945857599b6
+      size: 100264
       isexec: true
     - path: output/model.joblib
-      md5: d87b696069cf3eba5c2d327460724936
-      size: 18818
+      md5: 7ceb91ab28ac5a271330efc03e580744
+      size: 18962
       isexec: true
+    - path: summary.json
+      md5: 365c0c819e8276c0a1fbcba97ddbd8bc
+      size: 203

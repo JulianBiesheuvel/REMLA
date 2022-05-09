@@ -11,6 +11,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier, BaggingClassifier
 from sklearn.metrics import accuracy_score, classification_report
 from joblib import dump, load
+import json
 import matplotlib
 import matplotlib.pyplot as plt
 from text_preprocessing import _load_data
@@ -31,7 +32,7 @@ def train_classifier(classifier, X_train, y_train):
 def predict_labels(classifier, X_test):
     return classifier.predict(X_test)
 
-def main():
+def main(random_seed):
 
     raw_data = _load_data()
     preprocessed_data = load('output/preprocessed_data.joblib')
@@ -58,6 +59,7 @@ def main():
     file = open('output/misclassified_msgs.txt', 'a', encoding='utf-8')
     for key, value in classifiers.items():
         train_classifier(value, X_train, y_train)
+        AdaBoostClassifier(random_state=random_seed)
         pred[key] = predict_labels(value, X_test)
         pred_scores[key] = [accuracy_score(y_test, pred[key])]
         print('\n############### ' + key + ' ###############\n')
@@ -90,6 +92,7 @@ def main():
 
     # Store "best" classifier
     dump(classifiers['Decision Tree'], 'output/model.joblib')
+    accuracy.to_json(r'summary.json')
 
 if __name__ == "__main__":
-    main()
+    main(1)

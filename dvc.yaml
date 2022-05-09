@@ -23,4 +23,7 @@ stages:
     - output/accuracy_scores.png
     - output/misclassified_msgs.txt
     - output/model.joblib
+    metrics:
+      - summary.json:
+          cache: false
     

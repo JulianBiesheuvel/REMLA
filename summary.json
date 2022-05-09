@@ -1,0 +1,1 @@
+{"Accuracy Rate":{"SVM":0.8821770335,"Decision Tree":0.9611244019,"Multinomial NB":0.8827751196,"KNN":0.9342105263,"Random Forest":0.9736842105,"AdaBoost":0.9557416268,"Bagging Classifier":0.9700956938}}
